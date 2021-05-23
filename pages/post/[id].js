@@ -30,7 +30,7 @@ const Post = ({ post: serverPost }) => {
   }
 
   return (
-    <MainLayout>
+    <MainLayout title={`Post #${post.id}`}>
       <h1>{post.title}</h1>
       <hr />
       <p>{post.body}</p>

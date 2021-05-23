@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { MainLayout } from '../components/MainLayout';
 
-const Posts = ({ posts }) => {
-  /* const [posts, setPosts] = useState([]);
+const Posts = ({ posts: serverPosts }) => {
+  const [posts, setPosts] = useState(serverPosts);
 
   useEffect(() => {
     async function load() {
@@ -12,9 +12,18 @@ const Posts = ({ posts }) => {
       setPosts(json);
     }
 
-    load();
+    if (!serverPosts) {
+      load();
+    }
   }, []);
- */
+
+  if (!posts) {
+    return (
+      <MainLayout title="Posts">
+        <p>Loading posts...</p>
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout title="Posts">
@@ -34,7 +43,10 @@ const Posts = ({ posts }) => {
 
 export default Posts;
 
-Posts.getInitialProps = async () => {
+Posts.getInitialProps = async ({ req }) => {
+  if (!req) {
+    return { posts: null };
+  }
   const response = await fetch('http://localhost:4200/posts');
   const posts = await response.json();
 
