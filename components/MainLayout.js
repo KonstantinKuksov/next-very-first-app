@@ -7,11 +7,6 @@ export const MainLayout = ({ children, title = 'Page' }) => {
       <Head>
         <title>{title} | My First Next App</title>
         <meta name="keywords" content="ssr, react. next, next.js" />
-        <link
-          rel="shortcut icon"
-          href="../public/favicon.ico"
-          type="image/x-icon"
-        />
         <meta
           name="description"
           content="My very first experience with Next.js"
